@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>faroyzi</title>
+  <style>
+    .card {
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -2;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: -1;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    p.quote {
+      font-style: italic;
+      color: #ccc;
+      font-size: 0.9em;
+      margin-bottom: 20px;
+    }
+
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 12px 16px;
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    .links a:hover {
+      transform: scale(1.05);
+    }
+
+    .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .github { background: #24292e; }
+    .discord { background: #5865F2; }
+    .spotify { background: #1DB954; }
+
+    .links img {
+      width: 24px;
+      height: 24px;
+      margin-left: 12px;
+    }
+
+    .music-player {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 15px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9em;
+    }
+
+    .music-player img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .music-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .music-player button {
+      background-color: #1DB954;
+      border: none;
+      padding: 5px 10px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .view-counter {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .view-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .blink {
+      animation: blink-animation 0.1s infinite;
+    }
+
+    @keyframes blink-animation {
+      0%, 90%, 100% { opacity: 1; }
+      95% { opacity: 0; }
+    }
+
+    footer {
+      position: fixed;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.8em;
+    }
+  .visited-box {
+  margin: 5px auto 0; /* jarak atas 20px, auto center */
+  background-color: rgba(255, 0, 0, 0.9);
+  padding: 5px 5px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9em;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+  max-width: 170px; /* batasin ukuran max */
+  justify-content: center;
+}
+.eye-icon {
+  width: 10px;
+  height: 20px;
+  animation: blink 3s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 1; }
+  46%, 50% { opacity: 0; }
+  51% { opacity: 1; }
+}
+.eye-icon {
+  width: 24px;
+  height: 24px;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 1; }
+  46%, 50% { opacity: 0; }
+  51% { opacity: 1; }
+}
+  </style>
+</head>
+<body>
+<video autoplay muted loop style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+  <source src="https://file.garden/aAnlUiRCrCCMWiyH/e4d752478c505754efa97c4642f07f0c.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<div class="overlay"></div>
+
+<div class="container">
+  <h2>FAROYZI</h2>
+  <p class="quote">"The sky doesn't need acknowledgment from dust, so stay calm... and remain beneath me."</p>
+  <h4>Connect With Me</h4>
+  <div class="links">
+    <a class="instagram" href="https://www.instagram.com/ozysparda?igsh=MWJtZm8xaG5vd210ZA==" target="_blank">
+      Instagram
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
+    </a>
+    <a class="github" href="https://github.com/ozysparda" target="_blank">
+      GitHub
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" />
+    </a>
+    <a class="discord" href="https://discord.com/users/1312048022074691669" target="_blank">
+      Discord
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" />
+    </a>
+    <a class="spotify" href="https://open.spotify.com/user/312we7gilihytgip2bryjj3efn74?si=DCk3J_BxSd2UAyqzHyK1kw" target="_blank">
+      Spotify
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify" />
+    </a>
+    <!-- VIEW COUNTER -->
+<div class="visited-box">
+  <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="eye icon" class="eye-icon" />
+  visited by 1.4M
+</div>
+  </div>
+</div>
+
+
+
+<div class="music-player">
+  <img src="https://file.garden/aAnlUiRCrCCMWiyH/images%20(30).jpeg" alt="Album Cover">
+  <div class="music-info">
+    <span>All We Know - The Chainsmokers</span>
+    <button id="play-btn">Play</button>
+  </div>
+</div>
+
+<audio id="background-audio" loop>
+  <source src="https://file.garden/aAnlUiRCrCCMWiyH/The%20Chainsmokers%20-%20All%20We%20Know%20(Audio)%20ft.%20Phoebe%20Ryan.mp3" type="audio/mp3" />
+</audio>
+
+<footer>&copy; 2017 faroyzi All rights reserved.</footer>
+
+<script>
+  const audio = document.getElementById('background-audio');
+  const playBtn = document.getElementById('play-btn');
+  let isPlaying = false;
+
+  playBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      audio.pause();
+      playBtn.textContent = 'Play';
+    } else {
+      audio.play();
+      playBtn.textContent = 'Pause';
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
+</body>
+</html>
